@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(255, 240, 217);
 }
 
 code {
@@ -19,4 +20,8 @@ code {
 .square {
   height: 200px;
   width: 200px;
+}
+
+.header-row {
+  background-color: navajowhite;
 }
