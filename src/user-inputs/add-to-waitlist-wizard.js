@@ -4,16 +4,17 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Table from "react-bootstrap/Table";
 
 import StepWizard from "react-step-wizard";
 
 import UserContactInfoForm from "./user-contact-info-form";
+import WaitlistInfoTable from "../fragments/waitlist-info-table";
 
 /** Steps */
 const FirstFillInInfo = (props) => {
   const updateForm = props.update;
   const nextStep = props.nextStep;
+
   const submit = (values, formikBag) => {
     for (const key in values) {
       updateForm(key, values[key]);
@@ -22,54 +23,45 @@ const FirstFillInInfo = (props) => {
     nextStep();
   };
 
-  return <UserContactInfoForm handleSubmit={submit} />;
+  return (
+    <Container fluid>
+      <UserContactInfoForm handleSubmit={submit} />
+
+      <Button variant="secondary" href="/authenticated">
+        Go back to main page.
+      </Button>
+    </Container>
+  );
 };
 
 const SecondConfirmDetails = (props) => {
   const nextStep = props.nextStep;
   const prevStep = props.previousStep;
+  const form = props.form;
   return (
     <Container fluid>
       <Row>
         <h2>Here's what you have entered. Does it look alright?</h2>
       </Row>
       <Row>
+        <h2>
+          You need to be able to receive phone calls at this phone number.
+        </h2>
+      </Row>
+      <Row>
         <Col md={6}>
           <Row>
-            <Table responsive borderless hover striped>
-              <tbody>
-                <tr>
-                  <th>First name: </th>
-                  <td>{props.form.firstName}</td>
-                </tr>
-                <tr>
-                  <th>Last name: </th>
-                  <td>{props.form.lastName}</td>
-                </tr>
-                <tr>
-                  <th>Age: </th>
-                  <td>{props.form.age}</td>
-                </tr>
-                <tr>
-                  <th>Zip Code: </th>
-                  <td>{props.form.zip}</td>
-                </tr>
-                <tr>
-                  <th>Phone number: </th>
-                  <td>{props.form.phone_number}</td>
-                </tr>
-              </tbody>
-            </Table>
+            <WaitlistInfoTable form={form} />
           </Row>
           <Row>
             <Col>
-              <Button variant="primary" onClick={nextStep}>
-                This is correct.
+              <Button variant="secondary" onClick={prevStep}>
+                Let me change something.
               </Button>
             </Col>
             <Col>
-              <Button variant="secondary" onClick={prevStep}>
-                Let me change something.
+              <Button variant="primary" onClick={nextStep}>
+                This is correct.
               </Button>
             </Col>
           </Row>
@@ -79,25 +71,13 @@ const SecondConfirmDetails = (props) => {
   );
 };
 
-const Verify = (props) => {
+const LastConfirmation = (props) => {
   return (
-    <div>
-      <div className={"text-center"}>
-        <h3>This is the last step in this example!</h3>
-        <hr />
-      </div>
-    </div>
-  );
-};
-
-const Last = (props) => {
-  return (
-    <div>
-      <div className={"text-center"}>
-        <h3>This is the last step in this example!</h3>
-        <hr />
-      </div>
-    </div>
+    <Container fluid>
+      <Row>
+        <h2> Thanks! We have saved your place in the waitlist.</h2>
+      </Row>
+    </Container>
   );
 };
 
@@ -114,10 +94,10 @@ class AddToWaitlistWizard extends Component {
   render() {
     return (
       <Container fluid>
-        <StepWizard isHashEnabled>
-          <FirstFillInInfo hashKey={"new-signup"} update={this.updateForm} />
-          <SecondConfirmDetails hashKey={"review"} form={this.state.form} />
-          <Last hashKey={"confirmed"} />
+        <StepWizard>
+          <FirstFillInInfo update={this.updateForm} />
+          <SecondConfirmDetails form={this.state.form} />
+          <LastConfirmation />
         </StepWizard>
       </Container>
     );

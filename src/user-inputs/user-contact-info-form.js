@@ -1,5 +1,6 @@
 import React from "react";
 
+import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -131,18 +132,22 @@ function UserContactInfoForm(props) {
             </Form.Group>
           </Form.Row>
 
-          <Form.Group>
-            <Form.Check
-              required
-              name="terms"
-              label="Agree to terms and conditions"
-              onChange={handleChange}
-              isInvalid={!!errors.terms}
-              feedback={errors.terms}
-              id="validationFormik0"
-            />
-          </Form.Group>
-          <Button type="submit">Submit form</Button>
+          <Form.Row>
+            <Form.Group>
+              <Form.Check
+                required
+                name="terms"
+                label="Agree to terms and conditions"
+                onChange={handleChange}
+                isInvalid={!!errors.terms}
+                feedback={errors.terms}
+                id="validationFormik0"
+              />
+            </Form.Group>
+          </Form.Row>
+          <Form.Row>
+            <Button type="submit">Submit form</Button>
+          </Form.Row>
         </Form>
       )}
     </Formik>
