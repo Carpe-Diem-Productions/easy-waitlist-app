@@ -1,29 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-
-import Navigator from "./Navigator";
-import RoleSelector from "./RoleSelector";
+import App from "./App";
 
 import reportWebVitals from "./reportWebVitals";
 
+import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
-
-// Importing the Bootstrap CSS
-import "bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Container>
-      <Row>
-        <Navigator />
-      </Row>
-      <Row>
-        <RoleSelector />
-      </Row>
-    </Container>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );

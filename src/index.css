@@ -13,8 +13,9 @@ code {
     monospace;
 }
 
-.User-Questions-Graphics {
-  height: 200px;
+.Side-Graphics {
+  margin: 10%;
+  /* width: stretch; */
 }
 
 .square {

@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 
+import PromptGraphics from "../widgets/prompt-graphics";
 import doctor_img from "../doctor.png";
 
 function HasSymptoms(props) {
@@ -41,13 +42,10 @@ class SimpleSymptomQuestions extends Component {
     return (
       <Container fluid className="my-3">
         <Row className="justify-content-md-center my-3">
-          <Col md={4}>
-            <img
-              src={doctor_img}
-              className="User-Questions-Graphics"
-              alt="An illustration of a doctor"
-            />
-          </Col>
+          <PromptGraphics
+            img_path={doctor_img}
+            alt_text="An illustration of a doctor"
+          />
           <Col>
             <Row className="my-3">
               <h2>Are you experiencing any symptoms today?</h2>
@@ -65,50 +63,49 @@ class SimpleSymptomQuestions extends Component {
                 <li>Sneezing / runny nose</li>
               </ul>
             </Row>
+            <Row className="my-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  this.userClickedYes();
+                  hasSymptomsHandler();
+                }}
+              >
+                {"Yes, I'm feeling unwell today."}
+              </Button>
+            </Row>
+            <Row className="my-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  this.userClickedNo();
+                  hasNoSymptomsHandler();
+                }}
+              >
+                {"No, I'm not experiencing symptoms."}
+              </Button>
+            </Row>
+            <Row>
+              <p>
+                You have selected:{" "}
+                {<HasSymptoms userResponse={this.state.userResponse} />}
+              </p>
+            </Row>
+            <Row className="my-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  nextButtonClicked();
+                }}
+                disabled={this.state.isNextButtonDisabled}
+              >
+                Next
+              </Button>
+            </Row>
           </Col>
-        </Row>
-
-        <Row className="justify-content-md-center my-3">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() => {
-              this.userClickedYes();
-              hasSymptomsHandler();
-            }}
-          >
-            {"Yes, I'm feeling unwell today."}
-          </Button>
-        </Row>
-        <Row className="justify-content-md-center my-3">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() => {
-              this.userClickedNo();
-              hasNoSymptomsHandler();
-            }}
-          >
-            {"No, I'm not experiencing symptoms."}
-          </Button>
-        </Row>
-        <Row>
-          <p>
-            You have selected:{" "}
-            {<HasSymptoms userResponse={this.state.userResponse} />}
-          </p>
-        </Row>
-        <Row className="my-3">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() => {
-              nextButtonClicked();
-            }}
-            disabled={this.state.isNextButtonDisabled}
-          >
-            Next
-          </Button>
         </Row>
       </Container>
     );

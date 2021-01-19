@@ -2,19 +2,18 @@ import React, { Component } from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
 
 import ReadyToStart from "./user-inputs/ready-to-start";
 import SimpleSymptomQuestions from "./user-inputs/simple-symptoms-question";
-import WhatDoYouWantToDoQuestion from "./user-inputs/what-do-you-want-to-do";
+
+import UserSignIn from "./authenticated-endpoints/user-sign-in";
+
 import StayHome from "./static-results/stay-home";
 
 class UserMainPage extends Component {
   state = {
     currState: "0-initial",
     userHasSymptoms: null,
-    isNextButtonDisabled: false,
   };
 
   UserDisplayComponentsByState() {
@@ -33,8 +32,8 @@ class UserMainPage extends Component {
           hasNoSymptomsHandler={() => this.userHasNoSymptoms()}
         />
       );
-    } else if (currState === "2-what-do-you-want-to-do") {
-      return <WhatDoYouWantToDoQuestion />;
+    } else if (currState === "2-sign-in") {
+      return <UserSignIn />;
     } else if (currState === "result-stay-home") {
       return <StayHome />;
     } else {
@@ -51,7 +50,7 @@ class UserMainPage extends Component {
       if (this.state.userHasSymptoms === true) {
         this.setState({ currState: "result-stay-home" });
       } else if (this.state.userHasSymptoms === false) {
-        this.setState({ currState: "2-what-do-you-want-to-do" });
+        this.setState({ currState: "2-sign-in" });
       }
     }
     return null;

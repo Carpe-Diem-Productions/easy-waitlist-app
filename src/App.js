@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
-function App() {
+import Navigator from "./Navigator";
+import RoleSelector from "./RoleSelector";
+import UserSessionEstablished from "./authenticated-endpoints/user-session-establed";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Container>
+      <Router>
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/authenticated">
+            <Authenticated />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </Container>
+  );
+}
+
+function Home() {
+  return (
+    <div>
+      <Row>
+        <Navigator />
+      </Row>
+      <Row>
+        <RoleSelector />
+      </Row>
     </div>
   );
 }
 
-export default App;
+function Authenticated() {
+  return (
+    <div>
+      <Row>
+        <Navigator />
+      </Row>
+      <Row>
+        <UserSessionEstablished />
+      </Row>
+    </div>
+  );
+}

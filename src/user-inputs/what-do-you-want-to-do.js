@@ -1,49 +1,68 @@
 import React, { Component } from "react";
+
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
+
 import doctor_img from "../doctor.png";
 
 class WhatDoYouWantToDoQuestion extends Component {
-  state = {
-    userResponse: null,
-  };
+  state = {};
   render() {
+    const addToWaitlistHandler = this.props.addToWaitlistButton;
+    const verifyWaitlistButtonHandler = this.props.verifyWaitlistButton;
+    const removeFromWaitlistButtonHadler = this.props.removeFromWaitlistButton;
     return (
-      <div className="User-Questions">
-        <img
-          src={doctor_img}
-          className="User-Questions-Graphics"
-          alt="An illustration of a doctor"
-        />
-
-        <h2>What would you like to do today?</h2>
-
-        <button
-          className="square"
-          onClick={() => {
-            this.setState({ userResponse: true });
-            // this.props.yesHandler();
-          }}
-        >
-          {"Add myself to the COVID-19 vaccine waitlist"}
-        </button>
-        <button
-          className="square"
-          onClick={() => {
-            this.setState({ userResponse: false });
-            // this.props.noHandler();
-          }}
-        >
-          {"Verify my existing waitlist information"}
-        </button>
-        <button
-          className="square"
-          onClick={() => {
-            this.setState({ userResponse: false });
-            // this.props.noHandler();
-          }}
-        >
-          {"Edit my existing waitlist information"}
-        </button>
-      </div>
+      <Container fluid className="my-3">
+        <Row className="justify-content-md-center my-3">
+          <Col md={4} sm={1}>
+            <img
+              src={doctor_img}
+              className="img-fluid"
+              alt="An illustration of a doctor"
+            />
+          </Col>
+          <Col>
+            <Row className="my-3">
+              <h2>What would you like to do today?</h2>
+            </Row>
+            <Row className="my-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  addToWaitlistHandler();
+                }}
+              >
+                {"Add myself to the COVID-19 vaccine waitlist"}
+              </Button>
+            </Row>
+            <Row className="my-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  verifyWaitlistButtonHandler();
+                }}
+              >
+                {"Verify my existing waitlist information"}
+              </Button>
+            </Row>
+            <Row className="my-3">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => {
+                  removeFromWaitlistButtonHadler();
+                }}
+              >
+                {"Edit my existing waitlist information"}
+              </Button>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
