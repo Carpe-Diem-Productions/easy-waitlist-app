@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import ReadyToStart from "./user-inputs/ready-to-start";
 import SimpleSymptomQuestions from "./user-inputs/simple-symptoms-question";
 
-import UserSignIn from "./authenticated-endpoints/user-sign-in";
+import UserSignIn from "./user-inputs/user-sign-in";
 
 import StayHome from "./static-results/stay-home";
 
