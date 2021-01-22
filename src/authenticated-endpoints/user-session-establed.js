@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -6,51 +6,46 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
+import { useAuth } from "../ProvideAuth";
+
 import WhatDoYouWantToDoQuestion from "../user-inputs/what-do-you-want-to-do";
 
 import AddToWaitlistWizard from "../user-inputs/add-to-waitlist-wizard";
 
-class UserSessionEstablished extends Component {
-  state = {
-    userFirstName: "Foo",
-    userLastName: "Bar",
-    userIntent: null,
-    sessionID: null,
+const UserSessionEstablished = () => {
+  let auth = useAuth();
+  let [userPhoneNumber, setUserPhoneNumber] = useState(auth.user.phoneNumber);
+  let [userIntent, setUserIntent] = useState("");
+
+  const userToAddToWaitlist = () => {
+    setUserIntent({ userIntent: "add" });
   };
 
-  userToAddToWaitlist() {
-    this.setState({ userIntent: "add" });
-  }
+  const userToVerifyWaitlist = () => {
+    setUserIntent({ userIntent: "verify" });
+  };
 
-  userToVerifyWaitlist() {
-    this.setState({ userIntent: "verify" });
-  }
+  const userToRemoveFromWaitlist = () => {
+    setUserIntent({ userIntent: "remove" });
+  };
 
-  userToRemoveFromWaitlist() {
-    this.setState({ userIntent: "remove" });
-  }
-
-  render() {
-    return (
-      <Container fluid>
-        <Row>
-          <p>
-            Welcome, {this.state.userFirstName} {this.state.userLastName}
-          </p>
-        </Row>
-        <Row>
-          {this.state.userIntent === null && (
-            <WhatDoYouWantToDoQuestion
-              addToWaitlistButton={() => this.userToAddToWaitlist()}
-              verifyWaitlistButton={() => this.userToVerifyWaitlist()}
-              removeFromWaitlistButton={() => this.userToRemoveFromWaitlist()}
-            />
-          )}
-          {this.state.userIntent === "add" && <AddToWaitlistWizard />}
-        </Row>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container fluid>
+      <Row>
+        <p>Welcome! You are signed in as {userPhoneNumber}</p>
+      </Row>
+      <Row>
+        {userIntent === "" && (
+          <WhatDoYouWantToDoQuestion
+            addToWaitlistButton={() => userToAddToWaitlist()}
+            verifyWaitlistButton={() => userToVerifyWaitlist()}
+            removeFromWaitlistButton={() => userToRemoveFromWaitlist()}
+          />
+        )}
+        {userIntent === "add" && <AddToWaitlistWizard />}
+      </Row>
+    </Container>
+  );
+};
 
 export default UserSessionEstablished;
