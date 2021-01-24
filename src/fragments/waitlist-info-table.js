@@ -24,7 +24,7 @@ const WaitlistInfoTable = (props) => {
         </tr>
         <tr>
           <th>Phone number: </th>
-          <td>{props.form.phone_number}</td>
+          <td>{props.form.phoneNumber}</td>
         </tr>
       </tbody>
     </Table>

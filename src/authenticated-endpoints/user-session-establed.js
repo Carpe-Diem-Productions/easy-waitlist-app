@@ -11,22 +11,24 @@ import { useAuth } from "../ProvideAuth";
 import WhatDoYouWantToDoQuestion from "../user-inputs/what-do-you-want-to-do";
 
 import AddToWaitlistWizard from "../user-inputs/add-to-waitlist-wizard";
+import VerifyExistingWaitlistStatus from "../user-inputs/verify-existing-waitlist-status";
+import RemoveExistingWaitlist from "../user-inputs/remove-existing-waitlist";
 
 const UserSessionEstablished = () => {
   let auth = useAuth();
-  let [userPhoneNumber, setUserPhoneNumber] = useState(auth.user.phoneNumber);
+  let userPhoneNumber = auth.user.phoneNumber;
   let [userIntent, setUserIntent] = useState("");
 
   const userToAddToWaitlist = () => {
-    setUserIntent({ userIntent: "add" });
+    setUserIntent("add");
   };
 
   const userToVerifyWaitlist = () => {
-    setUserIntent({ userIntent: "verify" });
+    setUserIntent("verify");
   };
 
   const userToRemoveFromWaitlist = () => {
-    setUserIntent({ userIntent: "remove" });
+    setUserIntent("remove");
   };
 
   return (
@@ -43,6 +45,8 @@ const UserSessionEstablished = () => {
           />
         )}
         {userIntent === "add" && <AddToWaitlistWizard />}
+        {userIntent === "verify" && <VerifyExistingWaitlistStatus />}
+        {userIntent === "remove" && <RemoveExistingWaitlist />}
       </Row>
     </Container>
   );

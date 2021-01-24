@@ -7,6 +7,8 @@ import Form from "react-bootstrap/Form";
 import { Formik } from "formik";
 import * as yup from "yup";
 
+import { useAuth } from "../ProvideAuth";
+
 const schema = yup.object().shape({
   firstName: yup.string().required().min(2).ensure(),
   lastName: yup.string().required().min(1).ensure(),
@@ -16,16 +18,17 @@ const schema = yup.object().shape({
     .required()
     .length(5)
     .matches(/^\d{5}$/),
-  phone_number: yup
+  phoneNumber: yup
     .string()
-    .required()
-    .length(10)
-    .matches(/^\d{10}$/, { message: "You should only enter numbers." }),
+    .length(12)
+    .matches(/^\+1\d{10}$/, { message: "You should only enter numbers." }),
   terms: yup.bool().required().oneOf([true], "Terms must be accepted"),
 });
 
 function UserContactInfoForm(props) {
   const submitHandler = props.handleSubmit;
+  let auth = useAuth();
+  let loggedInPhoneNumber = auth.user.phoneNumber;
 
   return (
     <Formik
@@ -36,7 +39,7 @@ function UserContactInfoForm(props) {
         lastName: "",
         age: "",
         zip: "",
-        phone_number: "",
+        phoneNumber: loggedInPhoneNumber,
         terms: false,
       }}
     >
@@ -119,15 +122,16 @@ function UserContactInfoForm(props) {
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Phone number"
-                name="phone_number"
-                value={values.phone_number}
+                defaultValue={loggedInPhoneNumber}
+                name="phoneNumber"
                 onChange={handleChange}
-                isInvalid={touched.phone_number && !!errors.phone_number}
+                isInvalid={!!errors.phoneNumber}
+                readOnly
+                plaintext
               />
 
               <Form.Control.Feedback type="invalid">
-                {errors.phone_number}
+                {errors.phoneNumber}
               </Form.Control.Feedback>
             </Form.Group>
           </Form.Row>

@@ -4,6 +4,7 @@ import firebase from "firebase";
 const firebaseConfig = {
   apiKey: "AIzaSyCGWQjgeoiIMJ9OWC055u7sowyKy9o3gCQ",
   authDomain: "easy-waitlist.firebaseapp.com",
+  databaseURL: "https://easy-waitlist-default-rtdb.firebaseio.com",
   projectId: "easy-waitlist",
   storageBucket: "easy-waitlist.appspot.com",
   messagingSenderId: "681742178576",
