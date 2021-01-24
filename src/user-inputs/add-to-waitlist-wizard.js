@@ -4,11 +4,13 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { LinkContainer } from "react-router-bootstrap";
 
 import StepWizard from "react-step-wizard";
 
 import UserContactInfoForm from "./user-contact-info-form";
 import WaitlistInfoTable from "../fragments/waitlist-info-table";
+import AddToWaitlistBackend from "../backend-ops/add-to-waitlist-backend";
 
 /** Steps */
 const FirstFillInInfo = (props) => {
@@ -27,9 +29,9 @@ const FirstFillInInfo = (props) => {
     <Container fluid>
       <UserContactInfoForm handleSubmit={submit} />
 
-      <Button variant="secondary" href="/authenticated">
-        Go back to main page.
-      </Button>
+      <LinkContainer to="/user">
+        <Button variant="secondary">Go back to main page.</Button>
+      </LinkContainer>
     </Container>
   );
 };
@@ -72,13 +74,23 @@ const SecondConfirmDetails = (props) => {
 };
 
 const LastConfirmation = (props) => {
-  return (
-    <Container fluid>
-      <Row>
-        <h2> Thanks! We have saved your place in the waitlist.</h2>
-      </Row>
-    </Container>
-  );
+  if (props.isActive) {
+    return (
+      <Container fluid>
+        <Row>
+          <AddToWaitlistBackend form={props.form} />
+        </Row>
+      </Container>
+    );
+  } else {
+    return (
+      <Container fluid>
+        <Row>
+          <h2>Saving your data...</h2>
+        </Row>
+      </Container>
+    );
+  }
 };
 
 class AddToWaitlistWizard extends Component {
@@ -97,7 +109,7 @@ class AddToWaitlistWizard extends Component {
         <StepWizard>
           <FirstFillInInfo update={this.updateForm} />
           <SecondConfirmDetails form={this.state.form} />
-          <LastConfirmation />
+          <LastConfirmation form={this.state.form} />
         </StepWizard>
       </Container>
     );

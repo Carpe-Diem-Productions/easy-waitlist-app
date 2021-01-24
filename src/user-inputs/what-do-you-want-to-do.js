@@ -57,7 +57,7 @@ class WhatDoYouWantToDoQuestion extends Component {
                   removeFromWaitlistButtonHadler();
                 }}
               >
-                {"Edit my existing waitlist information"}
+                {"Remove my existing waitlist information"}
               </Button>
             </Row>
           </Col>
