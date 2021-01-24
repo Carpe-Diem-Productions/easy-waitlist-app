@@ -31,7 +31,14 @@ const RemoveWaitlistInfo = (props) => {
           }
         });
     }
-  });
+
+    return function cleanup() {
+      firebase
+        .database()
+        .ref("/user/" + userPhoneNumber + "/" + props.waitlistRecordKey)
+        .off();
+    };
+  }, [props.waitlistRecordKey]);
 
   if (finishedRemoval === true) {
     return (

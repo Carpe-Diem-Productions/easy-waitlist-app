@@ -27,11 +27,16 @@ const FirstFillInInfo = (props) => {
 
   return (
     <Container fluid>
-      <UserContactInfoForm handleSubmit={submit} />
-
-      <LinkContainer to="/user">
-        <Button variant="secondary">Go back to main page.</Button>
-      </LinkContainer>
+      <Row>
+        <Container fluid>
+          <UserContactInfoForm handleSubmit={submit} />
+        </Container>
+      </Row>
+      <Row className="justify-content-md-center">
+        <LinkContainer to="/user">
+          <Button variant="secondary">Go back to main page.</Button>
+        </LinkContainer>
+      </Row>
     </Container>
   );
 };
@@ -79,6 +84,11 @@ const LastConfirmation = (props) => {
       <Container fluid>
         <Row>
           <AddToWaitlistBackend form={props.form} />
+        </Row>
+        <Row>
+          <LinkContainer to="/user">
+            <Button variant="primary">Return to main menu</Button>
+          </LinkContainer>
         </Row>
       </Container>
     );

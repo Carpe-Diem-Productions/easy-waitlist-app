@@ -10,6 +10,7 @@ import StepWizard from "react-step-wizard";
 import PrepareRemovingWaitlistInfo from "./prepare-removing-waitlist-info";
 
 import PromptGraphics from "../widgets/prompt-graphics";
+import BackToUserMainMenu from "../widgets/back-to-user-main-menu";
 import hello_img from "../hello.png";
 
 const RemoveExistingWaitlist = () => {
@@ -24,6 +25,7 @@ const RemoveExistingWaitlist = () => {
           <PrepareRemovingWaitlistInfo />
         </Row>
       </Row>
+      <BackToUserMainMenu />
     </Container>
   );
 };
