@@ -7,7 +7,10 @@ import { ProvideAuth } from "./ProvideAuth";
 import PrivateRoute from "./PrivateRoute";
 import Navigator from "./Navigator";
 import RoleSelector from "./RoleSelector";
+import UserSignIn from "./user-inputs/user-sign-in";
+import SimpleSymptomsQuestion from "./user-inputs/simple-symptoms-question";
 import UserSessionEstablished from "./authenticated-endpoints/user-session-establed";
+import AdminSessionEstablished from "./authenticated-endpoints/admin-session-establed";
 
 import AddToWaitlistWizard from "./user-inputs/add-to-waitlist-wizard";
 import VerifyExistingWaitlistStatus from "./user-inputs/verify-existing-waitlist-status";
@@ -31,8 +34,17 @@ export default function App() {
             <PrivateRoute path="/user/remove">
               <RemoveExistingWaitlist />
             </PrivateRoute>
+            <Route path="/user/start">
+              <SimpleSymptomsQuestion />
+            </Route>
+            <Route path="/user/login">
+              <UserSignIn />
+            </Route>
             <PrivateRoute path="/user">
               <UserSessionEstablished />
+            </PrivateRoute>
+            <PrivateRoute path="/admin">
+              <AdminSessionEstablished />
             </PrivateRoute>
             <Route path="/">
               <RoleSelector />
