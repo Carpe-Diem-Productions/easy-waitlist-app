@@ -10,6 +10,8 @@ import RoleSelector from "./RoleSelector";
 import UserSignIn from "./user-inputs/user-sign-in";
 import SimpleSymptomsQuestion from "./user-inputs/simple-symptoms-question";
 import UserSessionEstablished from "./authenticated-endpoints/user-session-establed";
+
+import AdminSignIn from "./admin-inputs/admin-sign-in";
 import AdminSessionEstablished from "./authenticated-endpoints/admin-session-establed";
 
 import AddToWaitlistWizard from "./user-inputs/add-to-waitlist-wizard";
@@ -43,6 +45,10 @@ export default function App() {
             <PrivateRoute path="/user">
               <UserSessionEstablished />
             </PrivateRoute>
+
+            <Route path="/admin/start">
+              <AdminSignIn />
+            </Route>
             <PrivateRoute path="/admin">
               <AdminSessionEstablished />
             </PrivateRoute>

@@ -5,20 +5,25 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Jumbotron from "react-bootstrap/Jumbotron";
 
 import { useAuth } from "../ProvideAuth";
 
-import WhatDoYouWantToDoQuestion from "../user-inputs/what-do-you-want-to-do";
-
 const AdminSessionEstablished = () => {
   let auth = useAuth();
-  let userPhoneNumber = auth.user.phoneNumber;
+  let userDisplayName = auth.user.displayName;
 
   return (
     <Container fluid>
-      <Row>
-        <WhatDoYouWantToDoQuestion />
-      </Row>
+      <Jumbotron className="my-3">
+        <h1>Welcome, {userDisplayName}!</h1>
+        <p>Let us help you find suitable vaccine recipients.</p>
+        <p>
+          <Button variant="primary" size="lg">
+            Start
+          </Button>
+        </p>
+      </Jumbotron>
     </Container>
   );
 };
