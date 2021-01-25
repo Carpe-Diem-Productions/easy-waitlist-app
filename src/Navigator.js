@@ -11,7 +11,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const Navigator = () => {
   let auth = useAuth();
   let userPhoneNumber = "";
-  if (typeof auth.user !== "undefined") {
+  if (typeof auth.user !== "undefined" && auth.user !== null) {
     userPhoneNumber = auth.user.phoneNumber;
   }
   return (

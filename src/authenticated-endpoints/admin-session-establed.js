@@ -10,7 +10,10 @@ import { useAuth } from "../ProvideAuth";
 
 import WhatDoYouWantToDoQuestion from "../user-inputs/what-do-you-want-to-do";
 
-const UserSessionEstablished = () => {
+const AdminSessionEstablished = () => {
+  let auth = useAuth();
+  let userPhoneNumber = auth.user.phoneNumber;
+
   return (
     <Container fluid>
       <Row>
@@ -20,4 +23,4 @@ const UserSessionEstablished = () => {
   );
 };
 
-export default UserSessionEstablished;
+export default AdminSessionEstablished;

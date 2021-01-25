@@ -11,6 +11,7 @@ import StepWizard from "react-step-wizard";
 import UserContactInfoForm from "./user-contact-info-form";
 import WaitlistInfoTable from "../fragments/waitlist-info-table";
 import AddToWaitlistBackend from "../backend-ops/add-to-waitlist-backend";
+import BackToUserMainMenu from "../widgets/back-to-user-main-menu";
 
 /** Steps */
 const FirstFillInInfo = (props) => {
@@ -32,11 +33,7 @@ const FirstFillInInfo = (props) => {
           <UserContactInfoForm handleSubmit={submit} />
         </Container>
       </Row>
-      <Row className="justify-content-md-center">
-        <LinkContainer to="/user">
-          <Button variant="secondary">Go back to main page.</Button>
-        </LinkContainer>
-      </Row>
+      <BackToUserMainMenu />
     </Container>
   );
 };
