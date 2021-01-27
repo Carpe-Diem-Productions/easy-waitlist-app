@@ -10,26 +10,23 @@ const RoleSelector = () => {
   return (
     <Container fluid>
       <Row className="justify-content-md-center">
-        <Col></Col>
-        <Col>
+        <Col md lg={6}>
           <LinkContainer to="/admin">
-            <Button variant="primary" size="lg" block className="my-3">
-              {"I'm an administrator at a health clinic"}
+            <Button variant="primary" size="lg" className="my-3" block>
+              {"I'm an administrator at a health clinic."}
             </Button>
           </LinkContainer>
         </Col>
-        <Col></Col>
       </Row>
-      <Row>
-        <Col></Col>
-        <Col>
+
+      <Row className="justify-content-md-center">
+        <Col md lg={6}>
           <LinkContainer to="/user">
-            <Button variant="primary" size="lg" block className="my-3">
-              {"I would like to sign up for the COVID-19 vaccine waitlist"}
+            <Button variant="primary" size="lg" className="my-3" block>
+              {"I want to sign up for the COVID-19 vaccine waitlist."}
             </Button>
           </LinkContainer>
         </Col>
-        <Col></Col>
       </Row>
     </Container>
   );
