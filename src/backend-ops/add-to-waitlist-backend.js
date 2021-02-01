@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 
 import firebase from "../MyFirebase";
+import { useAuth } from "../ProvideAuth";
 
 const AddToWaitlistBackend = (props) => {
-  var database = firebase.database();
+  const database = firebase.database();
+  let auth = useAuth();
   const [dbError, setDbError] = useState("");
   const [dbCompleted, setDbCompleted] = useState(false);
 
-  var newWaitlistRecordKey = database.ref().child("waitlist").push().key;
+  var newWaitlistRecordKey = database
+    .ref("/user/" + auth.user.uid + "/waitlist/")
+    .push().key;
 
   var waitlistRecord = {
     firstName: props.form.firstName,
@@ -19,10 +23,9 @@ const AddToWaitlistBackend = (props) => {
   };
 
   var updates = {};
-  updates["/waitlist/" + newWaitlistRecordKey] = waitlistRecord;
-  updates["/zip/" + props.form.zip + "/age/" + props.form.age] = waitlistRecord;
+
   updates[
-    "/user/" + props.form.phoneNumber + "/" + newWaitlistRecordKey
+    "/user/" + auth.user.uid + "/waitlist/" + newWaitlistRecordKey
   ] = waitlistRecord;
 
   useEffect(() => {

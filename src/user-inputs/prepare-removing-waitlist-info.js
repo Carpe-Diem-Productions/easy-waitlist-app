@@ -4,30 +4,40 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import { Alert } from "react-bootstrap";
 
 import firebase from "../MyFirebase";
 
 import { useAuth } from "../ProvideAuth";
 import WaitlistInfoTable from "../fragments/waitlist-info-table";
-import RemoveWaitlistInfo from "../backend-ops/remove-waitlist-info";
 
 const PrepareRemovingWaitlistInfo = (props) => {
   let auth = useAuth();
-  let userPhoneNumber = auth.user.phoneNumber;
 
   var database = firebase.database();
+  const [dbError, setDbError] = useState("");
   const [allWaitlistRecords, setAllWaitlistRecords] = useState(null);
-  const [recordKeyToBeRemoved, setRecordKeyToBeRemoved] = useState("invalid");
 
   useEffect(() => {
-    var userInfoRef = database.ref("user/" + userPhoneNumber);
+    var userInfoRef = database.ref("/user/" + auth.user.uid + "/waitlist");
     userInfoRef.on("value", (snapshot) => {
       setAllWaitlistRecords(snapshot.val());
     });
-  }, [database, userPhoneNumber]);
+  }, [database, auth.user]);
 
-  const doneRemoval = () => {
-    setRecordKeyToBeRemoved("invalid");
+  const removeRecord = async (recordKey) => {
+    console.debug("Trying to remove");
+    const dbRef = firebase
+      .database()
+      .ref("/user/" + auth.user.uid + "/waitlist/" + recordKey);
+
+    try {
+      await dbRef.remove();
+      return dbRef.off();
+    } catch (error) {
+      console.error(error);
+      setDbError(error);
+    }
   };
 
   if (
@@ -45,6 +55,11 @@ const PrepareRemovingWaitlistInfo = (props) => {
         <Row>
           <h1> Here's what you have registered: </h1>
         </Row>
+        <Row>
+          <Alert variant="danger" show={dbError !== ""}>
+            {dbError}
+          </Alert>
+        </Row>
         {Object.keys(allWaitlistRecords).map((singleRecordKey, i) => (
           <div key={i}>
             <Row>
@@ -55,7 +70,7 @@ const PrepareRemovingWaitlistInfo = (props) => {
                 <Button
                   variant="danger"
                   onClick={() => {
-                    setRecordKeyToBeRemoved(singleRecordKey);
+                    removeRecord(singleRecordKey);
                   }}
                 >
                   {"Remove this record"}
@@ -65,12 +80,6 @@ const PrepareRemovingWaitlistInfo = (props) => {
             <Row>
               <WaitlistInfoTable form={allWaitlistRecords[singleRecordKey]} />
             </Row>
-            {recordKeyToBeRemoved !== "invalid" && (
-              <RemoveWaitlistInfo
-                waitlistRecordKey={recordKeyToBeRemoved}
-                finishedCb={doneRemoval}
-              />
-            )}
           </div>
         ))}
       </Container>

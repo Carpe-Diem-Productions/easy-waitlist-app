@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
 import Jumbotron from "react-bootstrap/Jumbotron";
 
 import { useAuth } from "../ProvideAuth";
@@ -15,7 +11,7 @@ const AdminSessionEstablished = () => {
   let userDisplayName = auth.user.displayName;
 
   return (
-    <Container fluid>
+    <div>
       <Jumbotron className="my-3">
         <h1>Welcome, {userDisplayName}!</h1>
         <p>Let us help you find suitable vaccine recipients.</p>
@@ -34,7 +30,7 @@ const AdminSessionEstablished = () => {
           </LinkContainer>
         </p>
       </Jumbotron>
-    </Container>
+    </div>
   );
 };
 
