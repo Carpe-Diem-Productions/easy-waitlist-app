@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import logo_img from "./logo/vector/default-tight.svg";
 import Button from "react-bootstrap/Button";
 import Navbar from "react-bootstrap/Navbar";
@@ -35,16 +35,25 @@ const Navigator = () => {
         />
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse className="justify-content-end">
+      <Navbar.Collapse className="justify-content-end mr-1">
         <Navbar.Text hidden={!signedInState}>
           Signed in as:
-          <LinkContainer to="/user">
-            <a>
-              {userPhoneNumber}
-              {userDisplayName}
-            </a>
-          </LinkContainer>
+          {userPhoneNumber && (
+            <LinkContainer
+              to={auth.currentRole === "user" ? "/user" : "/admin"}
+            >
+              <Button variant="link">{userPhoneNumber}</Button>
+            </LinkContainer>
+          )}
+          {userDisplayName && (
+            <LinkContainer
+              to={auth.currentRole === "user" ? "/user" : "/admin"}
+            >
+              <Button variant="link">{userDisplayName}</Button>
+            </LinkContainer>
+          )}
         </Navbar.Text>
+
         <LinkContainer to="/">
           <Button
             variant="outline-secondary"

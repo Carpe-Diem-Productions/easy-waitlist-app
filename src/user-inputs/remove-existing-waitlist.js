@@ -1,11 +1,6 @@
 import React from "react";
 
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-
-import StepWizard from "react-step-wizard";
 
 import PrepareRemovingWaitlistInfo from "./prepare-removing-waitlist-info";
 
@@ -15,7 +10,7 @@ import hello_img from "../hello.png";
 
 const RemoveExistingWaitlist = () => {
   return (
-    <Container fluid className="my-3">
+    <div>
       <Row className="justify-content-md-center my-3">
         <PromptGraphics
           img_path={hello_img}
@@ -26,7 +21,7 @@ const RemoveExistingWaitlist = () => {
         </Row>
       </Row>
       <BackToUserMainMenu />
-    </Container>
+    </div>
   );
 };
 

@@ -1,7 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
 
 import { ProvideAuth } from "./ProvideAuth";
 import {
@@ -34,6 +33,18 @@ export default function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
+            {/* Unautenticated */}
+            <Route path="/user/start">
+              <SimpleSymptomsQuestion />
+            </Route>
+            <Route path="/user/login">
+              <UserSignIn />
+            </Route>
+            <Route path="/admin/start">
+              <AdminSignIn />
+            </Route>
+
+            {/* Autenticated as user*/}
             <UserPrivateRoute path="/user/add">
               <AddToWaitlistWizard />
             </UserPrivateRoute>
@@ -43,34 +54,27 @@ export default function App() {
             <UserPrivateRoute path="/user/remove">
               <RemoveExistingWaitlist />
             </UserPrivateRoute>
-            <Route path="/user/start">
-              <SimpleSymptomsQuestion />
-            </Route>
-            <Route path="/user/login">
-              <UserSignIn />
-            </Route>
             <UserPrivateRoute path="/user">
               <UserSessionEstablished />
             </UserPrivateRoute>
 
-            <Route path="/admin/profile">
-              <AdminInfoForm />
-            </Route>
-
+            {/* Autenticated as admin, activated only*/}
             <ActivatedAdminPrivateRoute path="/admin/post-activation">
               <h1>Congrats you are activated!</h1>
             </ActivatedAdminPrivateRoute>
-
+            {/* Autenticated as admin, unactivated only*/}
             <UnactivatedAdminPrivateRoute path="/admin/activate">
               <AdminActivatePage />
             </UnactivatedAdminPrivateRoute>
-
-            <Route path="/admin/start">
-              <AdminSignIn />
-            </Route>
+            {/* Autenticated as admin, both activated and unactivated */}
+            <AnyAdminPrivateRoute path="/admin/profile">
+              <AdminInfoForm />
+            </AnyAdminPrivateRoute>
             <AnyAdminPrivateRoute path="/admin">
               <AdminSessionEstablished />
             </AnyAdminPrivateRoute>
+
+            {/* Main, unauthenticated, must be last item on list */}
             <Route path="/">
               <RoleSelector />
             </Route>
