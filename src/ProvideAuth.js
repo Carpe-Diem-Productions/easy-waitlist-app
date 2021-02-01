@@ -42,13 +42,13 @@ function useProvideAuth() {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
-  const enterRoleBasedOnClaims = async (user) => {
+  const enterRoleBasedOnClaims = (user) => {
     if (!user) {
       setUser(null);
       setCurrentRole("visitor");
     } else {
       setUser(user);
-      await user.getIdTokenResult(true).then((idTokenResult) => {
+      user.getIdTokenResult(true).then((idTokenResult) => {
         if (!!idTokenResult.claims.could_see_admin) {
           if (!!idTokenResult.claims.admin_activated) {
             setCurrentRole("verified-admin");
