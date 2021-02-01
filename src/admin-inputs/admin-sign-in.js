@@ -78,9 +78,9 @@ const AdminSignIn = (props) => {
         // Because custom claims are set using Cloud Functions and doesn't happen right away
         // (even though it should happen quickly enough), monitoring the value at this
         // database location will tell us whether custom claims have been set.
-        metadataRef.on("value", (snapshot) => {
+        metadataRef.on("value", async (snapshot) => {
           if (snapshot.val() != null) {
-            auth.refreshIdToken();
+            await auth.refreshIdToken();
             setWaitingOnCloudFunctions(false);
             setSigninSuccess(true);
             metadataRef.off("value");
