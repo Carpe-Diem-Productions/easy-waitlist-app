@@ -4,7 +4,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
 import { ProvideAuth } from "./ProvideAuth";
-import PrivateRoute from "./PrivateRoute";
+import {
+  AnyAdminPrivateRoute,
+  UnactivatedAdminPrivateRoute,
+  ActivatedAdminPrivateRoute,
+  UserPrivateRoute,
+} from "./PrivateRoute";
 import Navigator from "./Navigator";
 import RoleSelector from "./RoleSelector";
 import UserSignIn from "./user-inputs/user-sign-in";
@@ -13,6 +18,8 @@ import UserSessionEstablished from "./authenticated-endpoints/user-session-estab
 
 import AdminSignIn from "./admin-inputs/admin-sign-in";
 import AdminSessionEstablished from "./authenticated-endpoints/admin-session-establed";
+import AdminInfoForm from "./admin-inputs/admin-info-form";
+import AdminActivatePage from "./admin-inputs/admin-activate-page";
 
 import AddToWaitlistWizard from "./user-inputs/add-to-waitlist-wizard";
 import VerifyExistingWaitlistStatus from "./user-inputs/verify-existing-waitlist-status";
@@ -27,31 +34,43 @@ export default function App() {
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
           <Switch>
-            <PrivateRoute path="/user/add">
+            <UserPrivateRoute path="/user/add">
               <AddToWaitlistWizard />
-            </PrivateRoute>
-            <PrivateRoute path="/user/verify">
+            </UserPrivateRoute>
+            <UserPrivateRoute path="/user/verify">
               <VerifyExistingWaitlistStatus />
-            </PrivateRoute>
-            <PrivateRoute path="/user/remove">
+            </UserPrivateRoute>
+            <UserPrivateRoute path="/user/remove">
               <RemoveExistingWaitlist />
-            </PrivateRoute>
+            </UserPrivateRoute>
             <Route path="/user/start">
               <SimpleSymptomsQuestion />
             </Route>
             <Route path="/user/login">
               <UserSignIn />
             </Route>
-            <PrivateRoute path="/user">
+            <UserPrivateRoute path="/user">
               <UserSessionEstablished />
-            </PrivateRoute>
+            </UserPrivateRoute>
+
+            <Route path="/admin/profile">
+              <AdminInfoForm />
+            </Route>
+
+            <ActivatedAdminPrivateRoute path="/admin/post-activation">
+              <h1>Congrats you are activated!</h1>
+            </ActivatedAdminPrivateRoute>
+
+            <UnactivatedAdminPrivateRoute path="/admin/activate">
+              <AdminActivatePage />
+            </UnactivatedAdminPrivateRoute>
 
             <Route path="/admin/start">
               <AdminSignIn />
             </Route>
-            <PrivateRoute path="/admin">
+            <AnyAdminPrivateRoute path="/admin">
               <AdminSessionEstablished />
-            </PrivateRoute>
+            </AnyAdminPrivateRoute>
             <Route path="/">
               <RoleSelector />
             </Route>

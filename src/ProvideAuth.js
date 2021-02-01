@@ -15,9 +15,12 @@ export function ProvideAuth({ children }) {
     return <authContext.Provider value={auth}>{children}</authContext.Provider>;
   } else {
     return (
-      <Spinner animation="border" size="lg" role="status">
-        <span className="sr-only">Loading...</span>
-      </Spinner>
+      <div>
+        <h1>Loading...</h1>
+        <Spinner animation="border" size="lg" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </div>
     );
   }
 }
@@ -34,16 +37,45 @@ export function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [currentRole, setCurrentRole] = useState("visitor");
 
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
 
+  const enterRoleBasedOnClaims = async (user) => {
+    if (!user) {
+      setUser(null);
+      setCurrentRole("visitor");
+    } else {
+      setUser(user);
+      await user.getIdTokenResult(true).then((idTokenResult) => {
+        if (!!idTokenResult.claims.could_see_admin) {
+          if (!!idTokenResult.claims.admin_activated) {
+            setCurrentRole("verified-admin");
+          } else {
+            setCurrentRole("unverified-admin");
+          }
+        } else {
+          setCurrentRole("user");
+        }
+      });
+    }
+  };
+
   const signInSuccessWithAuthResultCB = (authResult, redirectUrld) => {
-    setUser(authResult);
+    enterRoleBasedOnClaims(authResult.user);
   };
 
   const signInFailureCB = (result) => {
-    setUser(false);
+    enterRoleBasedOnClaims(null);
+  };
+
+  const refreshIdToken = () => {
+    if (user) {
+      return user.getIdToken(true).then(() => {
+        enterRoleBasedOnClaims(user);
+      });
+    }
   };
 
   const signout = () => {
@@ -51,7 +83,7 @@ function useProvideAuth() {
       .auth()
       .signOut()
       .then(() => {
-        setUser(false);
+        enterRoleBasedOnClaims(null);
       });
   };
 
@@ -60,28 +92,33 @@ function useProvideAuth() {
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
     // ... latest auth object.
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+    // This hook is primarily used to handle directly visitng a priviledged
+    // URL which doesn't force the user to sign in again
+
+    const unsubscribe1 = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        setUser(user);
+        await enterRoleBasedOnClaims(user);
+        setLoaded(true);
       } else {
-        setUser(false);
+        enterRoleBasedOnClaims(null);
+        setLoaded(true);
       }
-      setLoaded(true);
     });
 
     // Cleanup subscription on unmount
     return () => {
-      unsubscribe();
+      unsubscribe1();
     };
   });
 
   // Return the user object and auth methods
   return {
-    loaded,
     user,
-    setUser,
+    loaded,
+    currentRole,
     signInSuccessWithAuthResultCB,
     signInFailureCB,
+    refreshIdToken,
     signout,
   };
 }
