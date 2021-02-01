@@ -1,6 +1,5 @@
 import React from "react";
 
-import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -89,7 +88,6 @@ function UserContactInfoForm(props) {
               <Form.Label>Age</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Age"
                 name="age"
                 value={values.age}
                 onChange={handleChange}
@@ -104,7 +102,6 @@ function UserContactInfoForm(props) {
               <Form.Label>Zip</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Zip"
                 name="zip"
                 value={values.zip}
                 onChange={handleChange}

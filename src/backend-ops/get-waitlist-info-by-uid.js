@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from "react";
 
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
 import firebase from "../MyFirebase";
-
 import { useAuth } from "../ProvideAuth";
 import WaitlistInfoTable from "../fragments/waitlist-info-table";
 
-const GetWaitlistInfoByPhoneNumber = (props) => {
+const GetWaitlistInfoByUid = (props) => {
   var database = firebase.database();
   const [allWaitlistRecords, setAllWaitlistRecords] = useState(null);
   let auth = useAuth();
-  let userPhoneNumber = auth.user.phoneNumber;
 
   useEffect(() => {
-    var userInfoRef = database.ref("user/" + userPhoneNumber);
+    var userInfoRef = database.ref("/user/" + auth.user.uid + "/waitlist");
     userInfoRef.on("value", (snapshot) => {
       setAllWaitlistRecords(snapshot.val());
     });
-  }, [database, userPhoneNumber]);
+  }, [database, auth.user]);
 
   if (
     allWaitlistRecords === null ||
@@ -27,12 +24,12 @@ const GetWaitlistInfoByPhoneNumber = (props) => {
   ) {
     return (
       <div>
-        <h2> You haven't signed up yet. </h2>
+        <h1> You haven't signed up yet. </h1>
       </div>
     );
   } else {
     return (
-      <Container>
+      <div>
         <Row>
           <h1> Here's what you have registered: </h1>
         </Row>
@@ -46,9 +43,9 @@ const GetWaitlistInfoByPhoneNumber = (props) => {
             </Row>
           </div>
         ))}
-      </Container>
+      </div>
     );
   }
 };
 
-export default GetWaitlistInfoByPhoneNumber;
+export default GetWaitlistInfoByUid;
