@@ -9,7 +9,7 @@ import { useAuth } from "./ProvideAuth";
 // screen if you're not yet authenticated.
 export function AnyAdminPrivateRoute({ children, ...rest }) {
   let auth = useAuth();
-  console.log(auth.currentRole);
+  console.debug(auth.currentRole);
 
   return (
     <Route
@@ -44,7 +44,7 @@ export function AnyAdminPrivateRoute({ children, ...rest }) {
 
 export function UnactivatedAdminPrivateRoute({ children, ...rest }) {
   let auth = useAuth();
-  console.log(auth.currentRole);
+  console.debug(auth.currentRole);
 
   return (
     <Route
@@ -86,7 +86,7 @@ export function UnactivatedAdminPrivateRoute({ children, ...rest }) {
 
 export function ActivatedAdminPrivateRoute({ children, ...rest }) {
   let auth = useAuth();
-  console.log(auth.currentRole);
+  console.debug(auth.currentRole);
 
   return (
     <Route
@@ -121,6 +121,7 @@ export function ActivatedAdminPrivateRoute({ children, ...rest }) {
 
 export function UserPrivateRoute({ children, ...rest }) {
   let auth = useAuth();
+  console.debug(auth.currentRole);
 
   return (
     <Route

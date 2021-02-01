@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -16,7 +15,7 @@ import doctor_img from "../doctor.png";
 
 const ReadyToStart = (props) => {
   return (
-    <Container fluid className="my-3">
+    <div>
       <Row className="justify-content-md-center my-3">
         <PromptGraphics
           img_path={hello_img}
@@ -45,13 +44,13 @@ const ReadyToStart = (props) => {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 
 const DoYouHaveSymptoms = (props) => {
   return (
-    <Container fluid className="my-3">
+    <div>
       <Row className="justify-content-md-center my-3">
         <PromptGraphics
           img_path={doctor_img}
@@ -94,23 +93,23 @@ const DoYouHaveSymptoms = (props) => {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 
 const ResultStayHome = () => {
-  return <p>Please stay home and get tested.</p>;
+  return <h1>Please stay home and get tested.</h1>;
 };
 
 const SimpleSymptomsQuestion = () => {
   return (
-    <Container fluid>
+    <div>
       <StepWizard>
         <ReadyToStart />
         <DoYouHaveSymptoms />
         <ResultStayHome />
       </StepWizard>
-    </Container>
+    </div>
   );
 };
 

@@ -1,8 +1,5 @@
 import React from "react";
 
-import { useHistory, useLocation } from "react-router-dom";
-
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -15,11 +12,7 @@ import PromptGraphics from "../widgets/prompt-graphics";
 import hello_img from "../hello.png";
 
 const UserSignIn = () => {
-  let history = useHistory();
-  let location = useLocation();
   let auth = useAuth();
-
-  let { from } = location.state || { from: { pathname: "/" } };
 
   // Configure FirebaseUI.
   const uiConfig = {
@@ -42,7 +35,7 @@ const UserSignIn = () => {
   };
 
   return (
-    <Container fluid className="my-3">
+    <div>
       <Row className="justify-content-md-center my-3">
         <PromptGraphics
           img_path={hello_img}
@@ -57,7 +50,7 @@ const UserSignIn = () => {
           </Row>
         </Col>
       </Row>
-    </Container>
+    </div>
   );
 };
 

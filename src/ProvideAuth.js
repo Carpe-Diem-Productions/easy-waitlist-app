@@ -98,11 +98,10 @@ function useProvideAuth() {
     const unsubscribe1 = firebase.auth().onAuthStateChanged(async (user) => {
       if (user) {
         await enterRoleBasedOnClaims(user);
-        setLoaded(true);
       } else {
         enterRoleBasedOnClaims(null);
-        setLoaded(true);
       }
+      setLoaded(true);
     });
 
     // Cleanup subscription on unmount
