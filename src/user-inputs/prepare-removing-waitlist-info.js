@@ -19,21 +19,37 @@ const PrepareRemovingWaitlistInfo = (props) => {
   const [allWaitlistRecords, setAllWaitlistRecords] = useState(null);
 
   useEffect(() => {
-    var userInfoRef = database.ref("/user/" + auth.user.uid + "/waitlist");
+    var userInfoRef = database.ref("/user/" + auth.user.uid + "/waitlistKey");
     userInfoRef.on("value", (snapshot) => {
       setAllWaitlistRecords(snapshot.val());
     });
+    return () => {
+      userInfoRef.off();
+    };
   }, [database, auth.user]);
 
   const removeRecord = async (recordKey) => {
-    console.debug("Trying to remove");
-    const dbRef = firebase
-      .database()
-      .ref("/user/" + auth.user.uid + "/waitlist/" + recordKey);
+    const associatedZipCode = allWaitlistRecords[recordKey]["zip"];
+
+    const dbRef = firebase.database().ref();
+
+    var updates = {};
+
+    updates["/user/" + auth.user.uid + "/waitlistKey/" + recordKey] = null;
+
+    updates[
+      "/zip/" +
+        associatedZipCode +
+        "/uid/" +
+        auth.user.uid +
+        "/waitlistKey/" +
+        recordKey
+    ] = null;
+
+    updates["/waitlistKey/" + recordKey + "/toUid/" + auth.user.uid] = null;
 
     try {
-      await dbRef.remove();
-      return dbRef.off();
+      await dbRef.update(updates);
     } catch (error) {
       console.error(error);
       setDbError(error);
@@ -55,11 +71,13 @@ const PrepareRemovingWaitlistInfo = (props) => {
         <Row>
           <h1> Here's what you have registered: </h1>
         </Row>
-        <Row>
-          <Alert variant="danger" show={dbError !== ""}>
-            {dbError}
-          </Alert>
-        </Row>
+        {dbError !== "" && (
+          <Row>
+            <Alert variant="danger" show={dbError !== ""}>
+              {dbError}
+            </Alert>
+          </Row>
+        )}
         {Object.keys(allWaitlistRecords).map((singleRecordKey, i) => (
           <div key={i}>
             <Row>

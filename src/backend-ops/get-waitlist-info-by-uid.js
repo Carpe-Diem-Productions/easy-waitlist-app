@@ -12,10 +12,13 @@ const GetWaitlistInfoByUid = (props) => {
   let auth = useAuth();
 
   useEffect(() => {
-    var userInfoRef = database.ref("/user/" + auth.user.uid + "/waitlist");
+    var userInfoRef = database.ref("/user/" + auth.user.uid + "/waitlistKey");
     userInfoRef.on("value", (snapshot) => {
       setAllWaitlistRecords(snapshot.val());
     });
+    return () => {
+      userInfoRef.off();
+    };
   }, [database, auth.user]);
 
   if (
