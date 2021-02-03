@@ -29,6 +29,13 @@ const AdminSessionEstablished = () => {
             </Button>
           </LinkContainer>
         </p>
+        <p>
+          <LinkContainer to="/admin/set-zip-range">
+            <Button variant="primary" size="lg">
+              Set Zip Range
+            </Button>
+          </LinkContainer>
+        </p>
       </Jumbotron>
     </div>
   );
