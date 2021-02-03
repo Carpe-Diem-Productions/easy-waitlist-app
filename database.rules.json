@@ -17,6 +17,12 @@
         ".write": "$userId === auth.uid"
       }
     },
+    "admin": {
+      "$userId": {
+        ".read": "$userId === auth.uid",
+        ".write": "$userId === auth.uid"
+      }
+    },
     // User side
     "waitlistKey": {
       "$recordKey": {

@@ -11,7 +11,7 @@ import { useAuth } from "../ProvideAuth";
 import { LinkContainer } from "react-router-bootstrap";
 
 const schema = yup.object().shape({
-  activationCode: yup.string().required().min(11).ensure(),
+  activationCode: yup.string().required().min(12).ensure(),
   terms: yup.bool().required().oneOf([true], "Terms must be accepted."),
 });
 
