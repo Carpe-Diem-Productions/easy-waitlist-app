@@ -147,7 +147,7 @@ function UserContactInfoForm(props) {
             </Form.Group>
           </Form.Row>
           <Form.Row>
-            <Button type="submit">Submit form</Button>
+            <Button type="submit">Next</Button>
           </Form.Row>
         </Form>
       )}

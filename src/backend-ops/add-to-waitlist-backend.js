@@ -10,7 +10,7 @@ const AddToWaitlistBackend = (props) => {
   const [dbCompleted, setDbCompleted] = useState(false);
 
   var newWaitlistRecordKey = database
-    .ref("/user/" + auth.user.uid + "/waitlist/")
+    .ref("/user/" + auth.user.uid + "/waitlistKey/")
     .push().key;
 
   var waitlistRecord = {
@@ -25,8 +25,21 @@ const AddToWaitlistBackend = (props) => {
   var updates = {};
 
   updates[
-    "/user/" + auth.user.uid + "/waitlist/" + newWaitlistRecordKey
+    "/user/" + auth.user.uid + "/waitlistKey/" + newWaitlistRecordKey
   ] = waitlistRecord;
+
+  updates[
+    "/zip/" +
+      waitlistRecord.zip +
+      "/uid/" +
+      auth.user.uid +
+      "/waitlistKey/" +
+      newWaitlistRecordKey
+  ] = waitlistRecord;
+
+  updates[
+    "/waitlistKey/" + newWaitlistRecordKey + "/toUid/" + auth.user.uid
+  ] = true;
 
   useEffect(() => {
     if (dbCompleted === false) {

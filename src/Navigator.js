@@ -35,21 +35,20 @@ const Navigator = () => {
         />
       </Navbar.Brand>
       <Navbar.Toggle />
-      <Navbar.Collapse className="justify-content-end mr-1">
+      <Navbar.Collapse className="justify-content-end">
         <Navbar.Text hidden={!signedInState}>
-          Signed in as:
           {userPhoneNumber && (
             <LinkContainer
               to={auth.currentRole === "user" ? "/user" : "/admin"}
             >
-              <Button variant="link">{userPhoneNumber}</Button>
+              <Button variant="link">Signed in as: {userPhoneNumber}</Button>
             </LinkContainer>
           )}
           {userDisplayName && (
             <LinkContainer
               to={auth.currentRole === "user" ? "/user" : "/admin"}
             >
-              <Button variant="link">{userDisplayName}</Button>
+              <Button variant="link">Signed in as: {userDisplayName}</Button>
             </LinkContainer>
           )}
         </Navbar.Text>
