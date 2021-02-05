@@ -20,6 +20,7 @@ import AdminSessionEstablished from "./authenticated-endpoints/admin-session-est
 import AdminInfoForm from "./admin-inputs/admin-info-form";
 import AdminActivatePage from "./admin-inputs/admin-activate-page";
 import AdminSetZipRange from "./admin-inputs/admin-set-zip-range";
+import AdminSearchInWaitlist from "./admin-inputs/admin-search-in-waitlists";
 
 import AddToWaitlistWizard from "./user-inputs/add-to-waitlist-wizard";
 import VerifyExistingWaitlistStatus from "./user-inputs/verify-existing-waitlist-status";
@@ -62,6 +63,9 @@ export default function App() {
             {/* Autenticated as admin, activated only*/}
             <ActivatedAdminPrivateRoute path="/admin/set-zip-range">
               <AdminSetZipRange />
+            </ActivatedAdminPrivateRoute>
+            <ActivatedAdminPrivateRoute path="/admin/search-in-waitlist">
+              <AdminSearchInWaitlist />
             </ActivatedAdminPrivateRoute>
             <ActivatedAdminPrivateRoute path="/admin/post-activation">
               <h1>Congrats you are activated!</h1>
