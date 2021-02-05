@@ -36,6 +36,13 @@ const AdminSessionEstablished = () => {
             </Button>
           </LinkContainer>
         </p>
+        <p>
+          <LinkContainer to="/admin/search-in-waitlist">
+            <Button variant="primary" size="lg">
+              Search In Waitlist
+            </Button>
+          </LinkContainer>
+        </p>
       </Jumbotron>
     </div>
   );
