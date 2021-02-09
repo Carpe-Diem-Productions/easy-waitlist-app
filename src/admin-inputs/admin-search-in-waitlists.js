@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 import firebase from "../MyFirebase";
-// import { useAuth } from "../ProvideAuth";
 
-import WaitlistInfoTable from "../fragments/waitlist-info-table";
+import AdminDisplayConfirmedUsers from "./admin-display-confirmed-users";
 
 const AdminSearchInWaitlist = () => {
   const [showQueryResult, setShowQueryResult] = useState(false);
@@ -17,20 +17,6 @@ const AdminSearchInWaitlist = () => {
 
   const [callButtonDisabled, setCallButtonDisabled] = useState(false);
   const [confirmedUsers, setConfirmedUsers] = useState(null);
-
-  // let auth = useAuth();
-  // useEffect(() => {
-  //   let dbRef = firebase
-  //     .database()
-  //     .ref(
-  //       "/admin/" + auth.user.uid + "/waitlistSearchResult/cachedConfirmedList"
-  //     );
-  //   dbRef.once("value", (snapshot) => {
-  //     if (snapshot.val() !== null) {
-  //       setConfirmedUsers(snapshot.val().cachedConfirmedList);
-  //     }
-  //   });
-  // });
 
   const startSearch = (values, actions) => {
     setShowError(false);
@@ -79,6 +65,7 @@ const AdminSearchInWaitlist = () => {
       });
   };
 
+  // TODO: Use modals: https://react-bootstrap.github.io/components/modal/
   return (
     <div>
       <Row className="my-3">
@@ -101,23 +88,18 @@ const AdminSearchInWaitlist = () => {
           </Alert>
         </Row>
       )}
+      <Form>
+        <Form.Group controlId="formBasicRangeCustom">
+          <Form.Label>Range</Form.Label>
+          <Form.Control type="range" custom />
+        </Form.Group>
+      </Form>
       <Row className="my-3">
         <Button onClick={callUsers} disabled={callButtonDisabled}>
           Call Users
         </Button>
       </Row>
-
-      {confirmedUsers !== null &&
-        confirmedUsers.map((singleConfirmedUser, i) => (
-          <div key={i}>
-            <Row>
-              <h2>Record {i + 1}</h2>
-            </Row>
-            <Row>
-              <WaitlistInfoTable form={singleConfirmedUser} />
-            </Row>
-          </div>
-        ))}
+      <AdminDisplayConfirmedUsers />
     </div>
   );
 };
