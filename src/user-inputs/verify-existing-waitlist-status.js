@@ -15,13 +15,11 @@ class VerifyExistingWaitlistStatus extends Component {
     return (
       <div>
         <Row className="justify-content-md-center my-3">
+          <PromptGraphicsCol
+            img_path={hello_img}
+            alt_text="An illustration of a heart waving hello"
+          />
           <Col>
-            <PromptGraphicsCol
-              img_path={hello_img}
-              alt_text="An illustration of a heart waving hello"
-            />
-          </Col>
-          <Col lg={8}>
             <GetWaitlistInfoByUid />
           </Col>
         </Row>
