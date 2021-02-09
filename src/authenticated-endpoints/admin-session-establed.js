@@ -14,18 +14,11 @@ const AdminSessionEstablished = () => {
     <div>
       <Jumbotron className="my-3">
         <h1>Welcome, {userDisplayName}!</h1>
-        <p>Let us help you find suitable vaccine recipients.</p>
+        <p>Let us help you find last-minute COVID-19 vaccine recipients.</p>
         <p>
           <LinkContainer to="/admin/activate">
             <Button variant="primary" size="lg">
               Activate
-            </Button>
-          </LinkContainer>
-        </p>
-        <p>
-          <LinkContainer to="/admin/post-activation">
-            <Button variant="primary" size="lg">
-              Check Activation Status
             </Button>
           </LinkContainer>
         </p>

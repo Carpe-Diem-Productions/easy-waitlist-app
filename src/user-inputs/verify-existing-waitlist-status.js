@@ -5,9 +5,9 @@ import Col from "react-bootstrap/Col";
 
 import GetWaitlistInfoByUid from "../backend-ops/get-waitlist-info-by-uid";
 
-import PromptGraphics from "../widgets/prompt-graphics";
+import PromptGraphicsCol from "../widgets/prompt-graphics";
 import BackToUserMainMenu from "../widgets/back-to-user-main-menu";
-import hello_img from "../hello.png";
+import hello_img from "../images/hello.png";
 
 class VerifyExistingWaitlistStatus extends Component {
   state = {};
@@ -16,7 +16,7 @@ class VerifyExistingWaitlistStatus extends Component {
       <div>
         <Row className="justify-content-md-center my-3">
           <Col>
-            <PromptGraphics
+            <PromptGraphicsCol
               img_path={hello_img}
               alt_text="An illustration of a heart waving hello"
             />

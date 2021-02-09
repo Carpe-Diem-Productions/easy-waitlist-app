@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
 
+import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import firebase from "./MyFirebase";
 
@@ -16,10 +17,14 @@ export function ProvideAuth({ children }) {
   } else {
     return (
       <div>
-        <h1>Loading...</h1>
-        <Spinner animation="border" size="lg" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
+        <Row className="d-flex justify-content-center my-3">
+          <h1>Loading...</h1>
+        </Row>
+        <Row className="d-flex justify-content-center">
+          <Spinner animation="border" size="lg" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+        </Row>
       </div>
     );
   }

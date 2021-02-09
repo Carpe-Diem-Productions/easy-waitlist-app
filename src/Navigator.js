@@ -5,65 +5,73 @@ import Navbar from "react-bootstrap/Navbar";
 
 import { useAuth } from "./ProvideAuth";
 import { LinkContainer } from "react-router-bootstrap";
+import { Nav } from "react-bootstrap";
+import Image from "react-bootstrap/Image";
 
 const Navigator = () => {
   let auth = useAuth();
   let userPhoneNumber = "";
   let userDisplayName = "";
   let signedInState = false;
+  let homeLinkHref = "";
 
-  if (
-    typeof auth.user !== "undefined" &&
-    auth.user !== null &&
-    auth.user !== false
-  ) {
-    userPhoneNumber = auth.user.phoneNumber;
-    userDisplayName = auth.user.displayName;
-    signedInState = true;
-  } else {
+  if (auth.currentRole === "visitor") {
     signedInState = false;
+    homeLinkHref = "/";
+  } else if (auth.currentRole === "user") {
+    signedInState = true;
+    homeLinkHref = "/user";
+    userPhoneNumber = auth.user.phoneNumber;
+  } else if (auth.currentRole === "unverified-admin") {
+    signedInState = true;
+    homeLinkHref = "/admin";
+    userDisplayName = auth.user.displayName;
+  } else if (auth.currentRole === "verified-admin") {
+    signedInState = true;
+    homeLinkHref = "/admin";
+    userDisplayName = auth.user.displayName;
   }
 
   return (
-    <Navbar bg="light" variant="light">
+    <Navbar collapseOnSelect expand="md" bg="light" variant="light">
       <Navbar.Brand>
-        <img
-          alt="The logo of Easy Waitlist"
+        <Image
+          fluid
+          alt="Easy Waitlist"
           src={logo_img}
-          height="50"
           className="d-inline-block align-top"
         />
       </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse className="justify-content-end">
-        <Navbar.Text hidden={!signedInState}>
-          {userPhoneNumber && (
-            <LinkContainer
-              to={auth.currentRole === "user" ? "/user" : "/admin"}
-            >
-              <Button variant="link">Signed in as: {userPhoneNumber}</Button>
-            </LinkContainer>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Nav className="mr-auto">
+          <LinkContainer to={homeLinkHref}>
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
+        </Nav>
+        <Nav hidden={!signedInState}>
+          {userDisplayName !== "" && (
+            <Navbar.Text className="mr-3">
+              Signed in as: {userDisplayName}
+            </Navbar.Text>
           )}
-          {userDisplayName && (
-            <LinkContainer
-              to={auth.currentRole === "user" ? "/user" : "/admin"}
-            >
-              <Button variant="link">Signed in as: {userDisplayName}</Button>
-            </LinkContainer>
+          {userDisplayName === "" && userPhoneNumber !== "" && (
+            <Navbar.Text className="mr-3">
+              Signed in as: {userPhoneNumber}
+            </Navbar.Text>
           )}
-        </Navbar.Text>
-
-        <LinkContainer to="/">
+          {/* This button cannot be put inside a LinkContainer, 
+          because logging out needs a full browser reload using href*/}
           <Button
             variant="outline-secondary"
             onClick={() => {
               auth.signout();
             }}
-            hidden={!signedInState}
+            href="/"
           >
-            Log out
+            Log Out
           </Button>
-        </LinkContainer>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );

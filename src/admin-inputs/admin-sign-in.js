@@ -11,8 +11,8 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 import { useAuth } from "../ProvideAuth";
 
-import PromptGraphics from "../widgets/prompt-graphics";
-import hello_img from "../hello.png";
+import PromptGraphicsCol from "../widgets/prompt-graphics";
+import lock_img from "../images/lock.png";
 
 const AdminSignIn = (props) => {
   let location = useLocation();
@@ -110,37 +110,35 @@ const AdminSignIn = (props) => {
     );
   } else {
     return (
-      <Row>
-        <Col>
-          <Row className="justify-content-md-center my-3">
-            <PromptGraphics
-              img_path={hello_img}
-              alt_text="An illustration of a heart waving hello"
-            />
-          </Row>
-        </Col>
-        <Col>
-          {!!waitingOnCloudFunctions ? (
-            <div>
-              <Row>
-                <h1>Setting up your account...</h1>
-              </Row>
-              <Row>
-                <Spinner animation="border" size="lg" role="status">
-                  <span className="sr-only">Loading...</span>
-                </Spinner>
-              </Row>
-            </div>
-          ) : (
-            <Row className="my-3">
+      <div>
+        <Row className="mx-3 my-3 justify-content-center">
+          <h1>Admin Sign In</h1>
+        </Row>
+        <Row className="mx-lg-3 my-3">
+          <PromptGraphicsCol
+            img_path={lock_img}
+            alt_text="An illustration of a lock"
+          />
+
+          <Col className="mx-auto">
+            {!!waitingOnCloudFunctions ? (
+              <div>
+                <Row className="mx-auto justify-content-center">
+                  <h4>Preparing your account...</h4>
+                  <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+                </Row>
+              </div>
+            ) : (
               <StyledFirebaseAuth
                 uiConfig={uiConfig}
                 firebaseAuth={firebase.auth()}
               />
-            </Row>
-          )}
-        </Col>
-      </Row>
+            )}
+          </Col>
+        </Row>
+      </div>
     );
   }
 };

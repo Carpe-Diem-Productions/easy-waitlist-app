@@ -8,8 +8,8 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 
 import { useAuth } from "../ProvideAuth";
 
-import PromptGraphics from "../widgets/prompt-graphics";
-import hello_img from "../hello.png";
+import PromptGraphicsCol from "../widgets/prompt-graphics";
+import lock_img from "../images/lock.png";
 
 const UserSignIn = () => {
   let auth = useAuth();
@@ -36,18 +36,19 @@ const UserSignIn = () => {
 
   return (
     <div>
-      <Row className="justify-content-md-center my-3">
-        <PromptGraphics
-          img_path={hello_img}
-          alt_text="An illustration of a heart waving hello"
+      <Row className="mx-3 my-3 justify-content-center">
+        <h1>User Sign In</h1>
+      </Row>
+      <Row className="mx-lg-3 my-3">
+        <PromptGraphicsCol
+          img_path={lock_img}
+          alt_text="An illustration of a lock"
         />
-        <Col>
-          <Row className="my-3">
-            <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
-          </Row>
+        <Col className="mx-auto">
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
         </Col>
       </Row>
     </div>

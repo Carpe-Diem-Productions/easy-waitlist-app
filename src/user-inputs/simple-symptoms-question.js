@@ -7,98 +7,98 @@ import { LinkContainer } from "react-router-bootstrap";
 
 import StepWizard from "react-step-wizard";
 
-import PromptGraphics from "../widgets/prompt-graphics";
-import hello_img from "../hello.png";
-import doctor_img from "../doctor.png";
+import PromptGraphicsCol from "../widgets/prompt-graphics";
+import hello_img from "../images/hello.png";
+import doctor_img from "../images/doctor.png";
 
 /** Steps */
 
 const ReadyToStart = (props) => {
   return (
-    <div>
-      <Row className="justify-content-md-center my-3">
-        <PromptGraphics
-          img_path={hello_img}
-          alt_text="An illustration of a heart waving hello"
-        />
-        <Col>
-          <Row className="my-3">
-            <h2>Ready to start?</h2>
-          </Row>
-          <Row className="my-3">
-            <p>
-              You can add yourself to the waitlist, or check your existing
-              waitlist status.
-            </p>
-          </Row>
-          <Row className="my-3">
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                props.nextStep();
-              }}
-            >
-              Next
-            </Button>
-          </Row>
-        </Col>
-      </Row>
-    </div>
+    <Row className="mx-3 my-3">
+      <PromptGraphicsCol
+        img_path={hello_img}
+        alt_text="An illustration of a heart waving hello"
+      />
+      <Col>
+        <Row className="my-3">
+          <h2>Ready to start?</h2>
+        </Row>
+        <Row className="my-3">
+          <p>
+            You can add yourself to the waitlist, or check your existing
+            waitlist status.
+          </p>
+        </Row>
+        <Row className="my-3">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => {
+              props.nextStep();
+            }}
+          >
+            Next
+          </Button>
+        </Row>
+      </Col>
+    </Row>
   );
 };
 
 const DoYouHaveSymptoms = (props) => {
   return (
-    <div>
-      <Row className="justify-content-md-center my-3">
-        <PromptGraphics
-          img_path={doctor_img}
-          alt_text="An illustration of a doctor"
-        />
-        <Col>
-          <Row className="my-3">
-            <h2>Are you experiencing any symptoms today?</h2>
-          </Row>
-          <Row>
-            <p>
-              According to the Center for Disease Control, symptoms for COVID-19
-              include:
-            </p>
-          </Row>
-          <Row>
-            <ul>
-              <li>Coughing</li>
-              <li>Fever</li>
-              <li>Sneezing / runny nose</li>
-            </ul>
-          </Row>
-          <Row className="my-3">
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                props.nextStep();
-              }}
-            >
-              {"I'm feeling unwell today."}
+    <Row className="mx-3 my-3">
+      <PromptGraphicsCol
+        img_path={doctor_img}
+        alt_text="An illustration of a doctor"
+      />
+      <Col>
+        <Row className="my-3">
+          <h2>Are you experiencing any symptoms today?</h2>
+        </Row>
+        <Row>
+          <p>
+            According to the Center for Disease Control, symptoms for COVID-19
+            include:
+          </p>
+        </Row>
+        <Row>
+          <ul>
+            <li>Coughing</li>
+            <li>Fever</li>
+            <li>Sneezing / runny nose</li>
+          </ul>
+        </Row>
+        <Row className="my-3">
+          <Button
+            variant="primary"
+            size="lg"
+            onClick={() => {
+              props.nextStep();
+            }}
+          >
+            {"I'm feeling unwell today."}
+          </Button>
+        </Row>
+        <Row className="my-3">
+          <LinkContainer to="/user/login">
+            <Button variant="primary" size="lg">
+              {"No, I'm not experiencing symptoms."}
             </Button>
-          </Row>
-          <Row className="my-3">
-            <LinkContainer to="/user/login">
-              <Button variant="primary" size="lg">
-                {"No, I'm not experiencing symptoms."}
-              </Button>
-            </LinkContainer>
-          </Row>
-        </Col>
-      </Row>
-    </div>
+          </LinkContainer>
+        </Row>
+      </Col>
+    </Row>
   );
 };
 
 const ResultStayHome = () => {
-  return <h1>Please stay home and get tested.</h1>;
+  return (
+    <Row Row className="mx-3 my-3">
+      <h2>Please stay home and get tested.</h2>
+    </Row>
+  );
 };
 
 const SimpleSymptomsQuestion = () => {
