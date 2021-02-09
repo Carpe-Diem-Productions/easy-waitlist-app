@@ -1,6 +1,7 @@
 import React from "react";
 
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 import PrepareRemovingWaitlistInfo from "./prepare-removing-waitlist-info";
 
@@ -16,9 +17,9 @@ const RemoveExistingWaitlist = () => {
           img_path={hello_img}
           alt_text="An illustration of a heart waving hello"
         />
-        <Row>
+        <Col>
           <PrepareRemovingWaitlistInfo />
-        </Row>
+        </Col>
       </Row>
       <BackToUserMainMenu />
     </div>

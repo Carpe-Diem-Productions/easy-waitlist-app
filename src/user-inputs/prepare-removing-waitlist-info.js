@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -67,7 +66,7 @@ const PrepareRemovingWaitlistInfo = (props) => {
     );
   } else {
     return (
-      <Container>
+      <div>
         <Row>
           <h1> Here's what you have registered: </h1>
         </Row>
@@ -100,7 +99,7 @@ const PrepareRemovingWaitlistInfo = (props) => {
             </Row>
           </div>
         ))}
-      </Container>
+      </div>
     );
   }
 };
