@@ -4,7 +4,7 @@
     {
       "type": "npm",
       "script": "start",
-      "label": "npm: start",
+      "label": "npm: start debug server",
       "detail": "react-scripts start",
       "problemMatcher": [
         {
@@ -22,11 +22,15 @@
             "endsPattern": "."
           }
         }
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      }
+      ]
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": ["$eslint-compact", "$eslint-stylish"],
+      "group": "build",
+      "label": "npm: build",
+      "detail": "react-scripts build"
     }
   ]
 }

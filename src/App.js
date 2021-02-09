@@ -28,8 +28,8 @@ import RemoveExistingWaitlist from "./user-inputs/remove-existing-waitlist";
 
 export default function App() {
   return (
-    <ProvideAuth>
-      <Container>
+    <Container fluid="lg">
+      <ProvideAuth>
         <Router>
           <Navigator />
           {/* A <Switch> looks through its children <Route>s and
@@ -67,9 +67,6 @@ export default function App() {
             <ActivatedAdminPrivateRoute path="/admin/search-in-waitlist">
               <AdminSearchInWaitlist />
             </ActivatedAdminPrivateRoute>
-            <ActivatedAdminPrivateRoute path="/admin/post-activation">
-              <h1>Congrats you are activated!</h1>
-            </ActivatedAdminPrivateRoute>
             {/* Autenticated as admin, unactivated only*/}
             <UnactivatedAdminPrivateRoute path="/admin/activate">
               <AdminActivatePage />
@@ -88,7 +85,7 @@ export default function App() {
             </Route>
           </Switch>
         </Router>
-      </Container>
-    </ProvideAuth>
+      </ProvideAuth>
+    </Container>
   );
 }

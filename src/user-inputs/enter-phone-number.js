@@ -7,7 +7,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 import PromptGraphics from "../widgets/prompt-graphics";
-import hello_img from "../hello.png";
+import hello_img from "../images/hello.png";
 
 class EnterPhoneNumber extends Component {
   state = {};

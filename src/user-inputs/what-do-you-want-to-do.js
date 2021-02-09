@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
 
-import doctor_img from "../doctor.png";
+import doctor_img from "../images/doctor.png";
 
 const WhatDoYouWantToDoQuestion = () => {
   return (
