@@ -32,7 +32,7 @@ export function AnyAdminPrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: location.pathname + "/start",
+              pathname: (location.pathname.endsWith("/") ? location.pathname + "start": location.pathname + "/start"),
               state: { from: location },
             }}
           />
@@ -142,7 +142,7 @@ export function UserPrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: location.pathname + "/start",
+              pathname: (location.pathname.endsWith("/") ? location.pathname + "start": location.pathname + "/start"),
               state: { from: location },
             }}
           />

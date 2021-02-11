@@ -5,9 +5,9 @@ import { LinkContainer } from "react-router-bootstrap";
 
 const BackToUserMainMenu = () => {
   return (
-    <Row className="justify-content-md-center">
+    <Row className="justify-content-center my-3">
       <LinkContainer to="/user">
-        <Button variant="primary">Return to main menu</Button>
+        <Button variant="secondary">Return to main menu</Button>
       </LinkContainer>
     </Row>
   );

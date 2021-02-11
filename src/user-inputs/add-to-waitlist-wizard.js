@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import { LinkContainer } from "react-router-bootstrap";
+import Alert from "react-bootstrap/Alert";
 
 import StepWizard from "react-step-wizard";
 
@@ -27,14 +27,10 @@ const FirstFillInInfo = (props) => {
   };
 
   return (
-    <Container fluid>
-      <Row>
-        <Container fluid>
-          <UserContactInfoForm handleSubmit={submit} />
-        </Container>
-      </Row>
+    <div>
+      <UserContactInfoForm handleSubmit={submit} />
       <BackToUserMainMenu />
-    </Container>
+    </div>
   );
 };
 
@@ -43,15 +39,13 @@ const SecondConfirmDetails = (props) => {
   const prevStep = props.previousStep;
   const form = props.form;
   return (
-    <Container fluid>
-      <Row>
-        <h2>Here's what you have entered. Does it look alright?</h2>
-      </Row>
-      <Row>
-        <h2>
-          You need to be able to receive phone calls at this phone number.
-        </h2>
-      </Row>
+    <div>
+      <h3>Here's what you have entered. Does it look alright?</h3>
+
+      <Alert variant="warning">
+        You need to be able to receive phone calls to this number. If you want
+        to use a different number, log out and log back in with that number.
+      </Alert>
       <Row>
         <Col md={6}>
           <Row>
@@ -71,31 +65,26 @@ const SecondConfirmDetails = (props) => {
           </Row>
         </Col>
       </Row>
-    </Container>
+      <BackToUserMainMenu />
+    </div>
   );
 };
 
 const LastConfirmation = (props) => {
   if (props.isActive) {
     return (
-      <Container fluid>
-        <Row>
-          <AddToWaitlistBackend form={props.form} />
-        </Row>
-        <Row>
-          <LinkContainer to="/user">
-            <Button variant="primary">Return to main menu</Button>
-          </LinkContainer>
-        </Row>
-      </Container>
+      <div>
+        <AddToWaitlistBackend form={props.form} />
+        <BackToUserMainMenu />
+      </div>
     );
   } else {
     return (
-      <Container fluid>
+      <div>
         <Row>
           <h2>Saving your data...</h2>
         </Row>
-      </Container>
+      </div>
     );
   }
 };
@@ -112,13 +101,13 @@ class AddToWaitlistWizard extends Component {
 
   render() {
     return (
-      <Container fluid>
+      <div>
         <StepWizard>
           <FirstFillInInfo update={this.updateForm} />
           <SecondConfirmDetails form={this.state.form} />
           <LastConfirmation form={this.state.form} />
         </StepWizard>
-      </Container>
+      </div>
     );
   }
 }

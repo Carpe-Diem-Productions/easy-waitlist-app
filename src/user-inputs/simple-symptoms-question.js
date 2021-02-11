@@ -95,7 +95,7 @@ const DoYouHaveSymptoms = (props) => {
 
 const ResultStayHome = () => {
   return (
-    <Row Row className="mx-3 my-3">
+    <Row className="mx-3 my-3">
       <h2>Please stay home and get tested.</h2>
     </Row>
   );
