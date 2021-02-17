@@ -49,17 +49,17 @@ const AdminDisplayConfirmedUsers = () => {
           <span className="sr-only">Loading...</span>
         </Spinner>
       )}
-      {hoursSinceDataGenerated < 6 && (
+      {confirmedUsers !== null && hoursSinceDataGenerated < 6 && (
         <Alert variant="success">
           Data generated at {hoursSinceDataGenerated} hours ago.
         </Alert>
       )}
-      {hoursSinceDataGenerated >= 6 && (
+      {confirmedUsers !== null && hoursSinceDataGenerated >= 6 && (
         <Alert variant="danger">
           Data generated at {hoursSinceDataGenerated} hours ago.
         </Alert>
       )}
-      {dataGeneratedTime !== "" && (
+      {confirmedUsers !== null && dataGeneratedTime !== "" && (
         <Row>
           <p>Data genereated at {dataGeneratedTime}. </p>
         </Row>
