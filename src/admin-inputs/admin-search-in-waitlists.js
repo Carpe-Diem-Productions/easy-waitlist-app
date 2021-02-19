@@ -17,6 +17,7 @@ const AdminSearchInWaitlist = () => {
   const [functionError, setFunctionError] = useState("");
 
   const [numWLRecordsFound, setNumWLRecordsFound] = useState(0);
+  const [numSpotsToFill, setNumSpotsToFill] = useState(0);
   const [searchButtonDisabled, setSearachButtonDisabled] = useState(false);
   const [callButtonDisabled, setCallButtonDisabled] = useState(false);
   const [confirmedUsers, setConfirmedUsers] = useState(null);
@@ -52,7 +53,7 @@ const AdminSearchInWaitlist = () => {
     setCallButtonDisabled(true);
     var callUsersFunc = firebase.functions().httpsCallable("startCallingUsers");
 
-    callUsersFunc({ numSpotsToFill: numWLRecordsFound })
+    callUsersFunc({ numSpotsToFill: numSpotsToFill })
       .then((result) => {
         // Read result of the Cloud Function.
         console.log(result.data);
@@ -89,11 +90,11 @@ const AdminSearchInWaitlist = () => {
         <Card.Header>Step 1</Card.Header>
         <Card.Body>
           <Card.Title>Start search based on selected zip codes</Card.Title>
-          <Card.Text>
-            <Button onClick={startSearch} disabled={searchButtonDisabled}>
-              Search
-            </Button>
-          </Card.Text>
+
+          <Button onClick={startSearch} disabled={searchButtonDisabled}>
+            Search
+          </Button>
+
           <Card.Text>
             {!!showQueryResult && (
               <b>Found {numWLRecordsFound} records on the waitlist!</b>
@@ -107,9 +108,10 @@ const AdminSearchInWaitlist = () => {
         <Card.Header>Step 2</Card.Header>
         <Card.Body>
           <Card.Title>Set how many waitlist spots you can fulfill</Card.Title>
-          <Card.Text>
-            <AdminSetNumberSpotsAvailable maxNumSpots={numWLRecordsFound} />
-          </Card.Text>
+          <AdminSetNumberSpotsAvailable
+            maxNumSpots={numWLRecordsFound}
+            setNumSpots={setNumSpotsToFill}
+          />
         </Card.Body>
       </Card>
 
@@ -117,11 +119,13 @@ const AdminSearchInWaitlist = () => {
         <Card.Header>Step 3</Card.Header>
         <Card.Body>
           <Card.Title>Start calling users</Card.Title>
-          <Card.Text>
-            <Button onClick={callUsers} disabled={callButtonDisabled}>
-              Call Users
-            </Button>
-          </Card.Text>
+
+          <Button
+            onClick={callUsers}
+            disabled={callButtonDisabled || numSpotsToFill <= 0}
+          >
+            Call Users
+          </Button>
         </Card.Body>
       </Card>
 
@@ -129,9 +133,8 @@ const AdminSearchInWaitlist = () => {
         <Card.Header>Result</Card.Header>
         <Card.Body>
           <Card.Title>Here's a list of confirmed users</Card.Title>
-          <Card.Text>
-            <AdminDisplayConfirmedUsers />
-          </Card.Text>
+
+          <AdminDisplayConfirmedUsers />
         </Card.Body>
       </Card>
     </div>

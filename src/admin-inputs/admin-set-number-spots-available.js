@@ -36,9 +36,12 @@ function AdminSetNumberSpotsAvailable(props) {
               min={1}
               max={props.maxNumSpots}
               step={1}
-              onChange={handleChange}
+              onChange={(evt) => {
+                props.setNumSpots(parseInt(evt.target.value, 10));
+                handleChange(evt);
+              }}
               custom
-              id="spots"
+              name="spots"
             />
           </Form.Group>
         </Form>
