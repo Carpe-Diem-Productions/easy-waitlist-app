@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Easy Waitlist App
+
+COVID-19 vaccines have a short shelf life once it's taken out of refrigerators. When
+someone who is scheduled to receive the vaccine misses their appointment, that dose
+might go into the waste bin if it's not injected before it expires. This app connects
+people who want to receive the vaccine with clinics who have extra doses.
+
+## How Does It Work
+
+- Users can sign up on the waitlist and put in their name, age, zip code and phone number.
+- Clinics (with verified accounts) can set a zip code search list, and with 1 click, let the
+  web app call users.
+  - The automated call will require users to pick up the phone and press a key to confirm
+    that they can show up at the clinic right away.
+  - Once the system has found enough users, it will display the contact information of all
+    users who have picked up the call and confirmed. The clinic can then follow up with users
+    directly.
+
+## How Is It Built
+
+### Stacks Used
+
+- Firebase Authentication
+- Firebase Real-time Database
+- Firebase Cloud Functions
+  - Including Twilio Programmable Voice API
+- Create-React-App + Bootstrap
+
+### Web App Portion
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+**This project has NOT been ejected using `yarn eject`**
 
-In the project directory, you can run:
+Your normal Create React App commands should work:
 
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
+- `yarn start`
+- `yarn test`
+- `yarn build`
+- `yarn eject`
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Cloud Functions Portion
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+See `easy-waitlist-cloud-functions` repo.
