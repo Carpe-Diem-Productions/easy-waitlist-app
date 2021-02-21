@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Alert from "react-bootstrap/Alert";
 import Accordion from "react-bootstrap/Accordion";
 
 const DemoOnlyWarning = () => {
   return (
     <div>
-      <Accordion defaultActiveKey="0">
+      <Accordion>
         <Alert variant="warning">
           <Accordion.Toggle as={Alert.Heading} eventKey="0">
             This is a demo version of the website. Click here to learn more.
