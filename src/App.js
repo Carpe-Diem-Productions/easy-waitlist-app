@@ -9,6 +9,7 @@ import {
   ActivatedAdminPrivateRoute,
   UserPrivateRoute,
 } from "./PrivateRoute";
+import DemoOnlyWarning from "./widgets/demo-only-warning";
 import Navigator from "./Navigator";
 import RoleSelector from "./RoleSelector";
 import UserSignIn from "./user-inputs/user-sign-in";
@@ -31,6 +32,7 @@ export default function App() {
     <Container fluid="lg">
       <ProvideAuth>
         <Router>
+          <DemoOnlyWarning />
           <Navigator />
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
