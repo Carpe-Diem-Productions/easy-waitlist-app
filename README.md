@@ -1,5 +1,9 @@
 # Easy Waitlist App
 
+## See a demo here: https://easy-waitlist.web.app/
+
+## Why Did I Create This
+
 COVID-19 vaccines have a short shelf life once it's taken out of refrigerators. When
 someone who is scheduled to receive the vaccine misses their appointment, that dose
 might go into the waste bin if it's not injected before it expires. This app connects
